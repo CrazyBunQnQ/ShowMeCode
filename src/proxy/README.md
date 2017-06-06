@@ -166,6 +166,7 @@ public void proxyTest2() throws NoSuchMethodException, IllegalAccessException, I
 - JDK 代理也叫做接口代理
 
 <br/>
+
 ## Cglib 代理
 上面的静态代理和 JDK 动态代理模式都要求目标对象实现一个接口，但是有时候目标对象只是一个单独的对象，并没有实现任何的接口，这个时候就可以使用以目标对象子类的方式类实现代理，这种方法就叫做：Cglib 代理
 
@@ -237,5 +238,5 @@ public class CglibProxyTest {
 }
 ```
 >在 Spring 的 AOP 编程中：
-如果加入容器的目标对象有实现接口，用 JDK 代理
-如果目标对象没有实现接口，用 Cglib 代理
+>如果加入容器的目标对象有实现接口，用 JDK 代理。
+>如果目标对象没有实现接口，用 Cglib 代理。
