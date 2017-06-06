@@ -14,8 +14,8 @@ tag:
 举个例子来说明代理的作用：
 假设我们想邀请一位明星，那么并不是直接连接明星，而是联系明星的经纪人，来达到同样的目的。明星就是一个目标对象，他只要负责活动中的节目，而其他琐碎的事情就交给他的代理人（经纪人）来解决。这就是代理思想在现实中的一个例子。
 用图表示如下：
-![代理模式](http://wx4.sinaimg.cn/mw690/a6e9cb00ly1fgb9aigh6lj20ez08ft8r.jpg)
 
+![代理模式](http://wx4.sinaimg.cn/mw690/a6e9cb00ly1fgb9aigh6lj20ez08ft8r.jpg)
 1. RealSubject 是委托类，Proxy 是代理类；
 2. Subject是委托类和代理类的接口；
 3. request() 是委托类和代理类的共同方法。
