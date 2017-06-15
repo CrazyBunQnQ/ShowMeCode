@@ -1,7 +1,7 @@
 package leet.code;
 
-import com.crazybunqnq.easy.ReverseInteger;
-import com.crazybunqnq.utils.TimeUtil;
+import com.crazybunqnq.leetcode.easy.ReverseInteger;
+import com.crazybunqnq.util.TimeUtil;
 import org.junit.jupiter.api.Test;
 
 public class MainTest {

@@ -1,8 +1,8 @@
 package design.pattern.proxy;
 
 import org.junit.Test;
-import proxy.cglib.ProxyFactory;
-import proxy.cglib.RealSubject;
+import com.crazybunqnq.design.pattern.proxy.cglib.ProxyFactory;
+import com.crazybunqnq.design.pattern.proxy.cglib.RealSubject;
 
 /**
  * Cglib 测试类
