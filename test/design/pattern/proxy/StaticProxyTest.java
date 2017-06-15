@@ -1,8 +1,8 @@
-package proxy;
+package design.pattern.proxy;
 
 import org.junit.Test;
-import proxy.statics.StaticProxy;
 import proxy.statics.RealSubject;
+import proxy.statics.StaticProxy;
 
 /**
  * 静态代理测试

@@ -1,4 +1,4 @@
-package proxy;
+package design.pattern.proxy;
 
 import org.junit.Test;
 import proxy.cglib.ProxyFactory;
