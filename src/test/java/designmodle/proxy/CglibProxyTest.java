@@ -1,4 +1,4 @@
-package design.pattern.proxy;
+package designmodle.proxy;
 
 import org.junit.Test;
 import com.crazybunqnq.design.pattern.proxy.cglib.ProxyFactory;

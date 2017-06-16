@@ -1,4 +1,4 @@
-package leet.code;
+package leetcode;
 
 import com.crazybunqnq.leetcode.easy.ReverseInteger;
 import com.crazybunqnq.util.TimeUtil;
