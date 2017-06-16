@@ -1,1 +1,1 @@
-学习和记录设计模式，并用 Java 代码练习这些设计模式。
+Learning and record the Java design patterns, and write the unit tests to practice these design patterns.
