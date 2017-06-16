@@ -131,7 +131,7 @@ public class MathCaptchaUtil {
         int color = randomColor();// 颜色
         paint.setColor(color);
         paint.setFakeBoldText(random.nextBoolean()); // 粗细；true为粗体，false为非粗体
-        float skewX = random.nextInt(11) / 10;
+        float skewX = random.nextInt(11) / 10F;
         skewX = random.nextBoolean() ? skewX : -skewX;
         paint.setTextSkewX(skewX); // float类型参数，负数表示右斜，整数左斜
         // paint.setUnderlineText(true); //true为下划线，false为非下划线
@@ -186,6 +186,10 @@ public class MathCaptchaUtil {
                 else
                     result = arg1 / arg2;
             }
+            break;
+            
+            default:
+                break;
         }
 
         if (Integer.parseInt(input) == result)// 如果在这里检测到异常抛出的话，容易使前边白做，因此提前

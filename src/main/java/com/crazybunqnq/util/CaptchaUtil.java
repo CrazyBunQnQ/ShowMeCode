@@ -209,16 +209,18 @@ public class CaptchaUtil {
         // 验证码使用随机字体
         String ttfPath = CAPTCHA_PATH + (useZh ? "zhttfs" : "ttfs") + FILE_SEPARATOR;
         String fontttf = this.fontttf;
-        if (fontttf.equals("") || fontttf == null) {
+        if (fontttf == null || "".equals(fontttf)) {
             File file = new File(ttfPath);
             File[] tempList = file.listFiles();
             ArrayList<File> ttfs = new ArrayList();
             String ttfName;
-            for (int i = 0; i < tempList.length; i++) {
-                if (tempList[i].isFile()) {
-                    ttfName = tempList[i].toString();
-                    if (ttfName.substring(ttfName.length() - 4, ttfName.length()).equals(".ttf")) {
-                        ttfs.add(tempList[i]);
+            if (tempList != null) {
+                for (int i = 0; i < tempList.length; i++) {
+                    if (tempList[i].isFile()) {
+                        ttfName = tempList[i].toString();
+                        if (ttfName.substring(ttfName.length() - 4, ttfName.length()).equals(".ttf")) {
+                            ttfs.add(tempList[i]);
+                        }
                     }
                 }
             }
@@ -247,7 +249,7 @@ public class CaptchaUtil {
             codeNX = (float) (fontSize * (i + 1) * 1.5);
             // 正向角度
             g.rotate(degree * Math.PI / 180, codeNX, fontSize / 2);
-            g.drawString(String.valueOf(chars[i]), codeNX, fontSize + random.nextInt(imageH / 4 + 1) + imageH / 4);
+            g.drawString(String.valueOf(chars[i]), codeNX, (fontSize + (float) random.nextInt(imageH / 4 + 1) + imageH / 4F));
             // 反向角度
             g.rotate(-degree * Math.PI / 180, codeNX, imageH / 2);
         }
@@ -301,12 +303,12 @@ public class CaptchaUtil {
         f = random.nextInt(imageH / 2 + 1) - imageH / 4;   // X轴方向偏移量
         T = random.nextInt(imageW * 2 - imageH + 1) + imageH;  // 周期
         w = (2 * Math.PI) / T;
-        b = py - A * Math.sin(w * px + f) - imageH / 2;
+        b = py - A * Math.sin(w * px + f) - imageH / 2.0;
         px1 = px2;
         px2 = imageW;
         for (px = px1; px <= px2; px = px + 1) {
             if (w != 0) {
-                py = A * Math.sin(w * px + f) + b + imageH / 2;  // y = Asin(ωx+φ) + b
+                py = A * Math.sin(w * px + f) + b + imageH / 2.0;  // y = Asin(ωx+φ) + b
                 int i = (int) (fontSize / 5);
                 while (i > 0) {
                     g.drawLine((int) px + i, (int) py + i, (int) px + i + 1, (int) py + i + 1);
@@ -343,18 +345,20 @@ public class CaptchaUtil {
         File[] tempList = file.listFiles();
         ArrayList<File> bgs = new ArrayList();
         String bgName;
-        for (int i = 0; i < tempList.length; i++) {
-            if (tempList[i].isFile()) {
-                bgName = tempList[i].toString();
-                if (bgName.substring(bgName.length() - 4, bgName.length()).equals(".jpg")) {
-                    bgs.add(tempList[i]);
+        if (tempList != null) {
+            for (int i = 0; i < tempList.length; i++) {
+                if (tempList[i].isFile()) {
+                    bgName = tempList[i].toString();
+                    if (bgName.substring(bgName.length() - 4, bgName.length()).equals(".jpg")) {
+                        bgs.add(tempList[i]);
+                    }
                 }
             }
+            bgName = bgs.get(random.nextInt(bgs.size())).toString();
+            Image backgroundImage = ImageIO.read(new File(bgName));
+            backgroundImage = backgroundImage.getScaledInstance(imageW, imageH, Image.SCALE_FAST);
+            g.drawImage(backgroundImage, 0, 0, imageW, imageH, null);
         }
-        bgName = bgs.get(random.nextInt(bgs.size())).toString();
-        Image backgroundImage = ImageIO.read(new File(bgName));
-        backgroundImage = backgroundImage.getScaledInstance(imageW, imageH, Image.SCALE_FAST);
-        g.drawImage(backgroundImage, 0, 0, imageW, imageH, null);
     }
 
     /**
@@ -379,7 +383,7 @@ public class CaptchaUtil {
         char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'a', 'b', 'c', 'd', 'e', 'f'};
         try {
-            byte[] strTemp = string.getBytes();
+            byte[] strTemp = string.getBytes("UTF-8");
             MessageDigest mdTemp = MessageDigest.getInstance("MD5");
             mdTemp.update(strTemp);
             byte[] md = mdTemp.digest();
@@ -393,6 +397,7 @@ public class CaptchaUtil {
             }
             return new String(str);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

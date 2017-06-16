@@ -29,6 +29,7 @@ public class PhotoUtil {
         int height = 100;
         String s = "你好";
 
+        //TODO Code contains a hard coded reference to an absolute pathname
         File file = new File("d:/image.jpg");
 
         Font font = new Font("Serif", Font.BOLD, 10);
@@ -58,6 +59,7 @@ public class PhotoUtil {
     public static void exportImg2(String username, String headImg) {
         try {
             // 1.jpg是你的 主图片的路径
+            //TODO Code contains a hard coded reference to an absolute pathname
             InputStream is = new FileInputStream("d:/原图.jpg");
 
             // 通过JPEG图象流创建JPEG数据流解码器
@@ -94,6 +96,7 @@ public class PhotoUtil {
 
             OutputStream os;
 
+            //TODO Code contains a hard coded reference to an absolute pathname
             os = new FileOutputStream("d:/新图.jpg");
 //			String shareFileName = "\\upload\\" + System.currentTimeMillis() + ".jpg";
 //			os = new FileOutputStream(shareFileName);
