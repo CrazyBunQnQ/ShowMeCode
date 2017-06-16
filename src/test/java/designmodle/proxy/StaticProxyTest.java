@@ -1,8 +1,8 @@
 package designmodle.proxy;
 
 import org.junit.Test;
-import com.crazybunqnq.design.pattern.proxy.statics.RealSubject;
-import com.crazybunqnq.design.pattern.proxy.statics.StaticProxy;
+import com.crazybunqnq.designpattern.proxy.statics.RealSubject;
+import com.crazybunqnq.designpattern.proxy.statics.StaticProxy;
 
 /**
  * 静态代理测试

@@ -1,6 +1,6 @@
 package leetcode;
 
-import com.crazybunqnq.leetcode.easy.ReverseInteger;
+import com.crazybunqnq.leetcode.algorithm.easy.ReverseInteger;
 import com.crazybunqnq.util.TimeUtil;
 import org.junit.jupiter.api.Test;
 
