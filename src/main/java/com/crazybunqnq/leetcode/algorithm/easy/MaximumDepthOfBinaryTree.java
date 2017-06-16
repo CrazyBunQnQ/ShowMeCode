@@ -27,10 +27,10 @@ public class MaximumDepthOfBinaryTree {
         if (root == null) {
             return 0;
         }
-        Map<BinaryTreeNode, Integer> depthMap = new HashMap<>();
+        Map<BinaryTreeNode, Integer> depthMap = new HashMap<BinaryTreeNode, Integer>();
         depthMap.put(root, 1);
         int maxDepth = 1;
-        Stack<BinaryTreeNode> stack = new Stack<>();
+        Stack<BinaryTreeNode> stack = new Stack<BinaryTreeNode>();
         stack.push(root);
         while (!stack.isEmpty()) {
             root = stack.pop();

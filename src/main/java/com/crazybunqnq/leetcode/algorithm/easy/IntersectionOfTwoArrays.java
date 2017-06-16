@@ -23,7 +23,7 @@ public class IntersectionOfTwoArrays {
      * @return
      */
     public static int[] intersection17ms(int[] nums1, int[] nums2) {
-        Set<Integer> nums = new HashSet<>();
+        Set<Integer> nums = new HashSet<Integer>();
         for (int x = 0; x < nums2.length; x++) {
             for (int y = 0; y < nums1.length; y++) {
                 if (nums2[x] == nums1[y]) {
@@ -48,9 +48,9 @@ public class IntersectionOfTwoArrays {
      * @return
      */
     public static int[] intersection7ms(int[] nums1, int[] nums2) {
-        Set<Integer> set = new HashSet<>();
+        Set<Integer> set = new HashSet<Integer>();
 
-        Set<Integer> result = new HashSet<>();
+        Set<Integer> result = new HashSet<Integer>();
 
         if (nums1 == null || nums2 == null)
             return null;

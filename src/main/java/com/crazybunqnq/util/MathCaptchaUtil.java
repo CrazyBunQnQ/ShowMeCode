@@ -1,8 +1,8 @@
 package com.crazybunqnq.util;
 
+import javafx.scene.paint.Color;
 import sun.rmi.runtime.Log;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 

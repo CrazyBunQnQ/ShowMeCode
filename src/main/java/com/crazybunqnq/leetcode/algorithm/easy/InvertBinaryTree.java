@@ -48,7 +48,7 @@ public class InvertBinaryTree {
      * @return
      */
     public static BinaryTreeNode invertTree2(BinaryTreeNode root) {
-        Queue<BinaryTreeNode> queue = new LinkedList<>();
+        Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
         queue.add(root);
         while (!queue.isEmpty()) {
             BinaryTreeNode node = queue.poll();
