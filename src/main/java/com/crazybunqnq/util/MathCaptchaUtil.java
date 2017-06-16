@@ -1,26 +1,24 @@
 package com.crazybunqnq.util;
 
-import javafx.scene.paint.Color;
-import sun.rmi.runtime.Log;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.text.TextUtils;
+import android.util.Log;
 
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class MathCaptchaUtil {
-    int result;
     private static final char[] CHARS = { // 定义随机字符集
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '零', '一', '二', '三', '四', '五', '六', '七', '八', '九'};
-
     private static final String[] OPERATORS = { // 定义随机字符集
             "加上", "减去", "乘以", "除以", "+", "-", "×", "÷"};
-
-    private static MathCaptchaUtil vCode;
-
-    public static MathCaptchaUtil getInstance() {// 单例模式获取验证码对象
-        if (vCode == null)
-            vCode = new MathCaptchaUtil();
-        return vCode;
-    }
+    // 验证码固定参数，也就是将会用到的几个常量
+    private static final int DEFAULT_FONT_SIZE = 20;// 字体大小
+    private static final int DEFAULT_LINE_NUMBER = 3;// 默认的用于干扰视线直线的条数
+    private static final int BASE_PADDING_LEFT = 10, RANGE_PADDING_LEFT = 15, BASE_PADDING_TOP = 20,
+            RANGE_PADDING_TOP = 10;
 
     // width="60" height="30"
     // base_padding_left="5"
@@ -30,45 +28,42 @@ public class MathCaptchaUtil {
     // codeLength="4"
     // line_number="3"
     // font_size="20"
-
-    // 验证码固定参数，也就是将会用到的几个常量
-    private static final int DEFAULT_FONT_SIZE = 20;// 字体大小
-    private static final int DEFAULT_LINE_NUMBER = 3;// 默认的用于干扰视线直线的条数
-    private static final int BASE_PADDING_LEFT = 10, RANGE_PADDING_LEFT = 15, BASE_PADDING_TOP = 20,
-            RANGE_PADDING_TOP = 10;
     /**
      * 上边4个整型数的解释： BASE_PADDING_LEFT,BASE_PADDING_TOP 表示每一个将要画出字符坐标计算的基准
      * RANGE_PADDING_LEFT,RANGE_PADDING_TOP 表示字符坐标x,y的变化范围
      */
     private static final int DEFAULT_WIDTH = 100, DEFAULT_HEIGHT = 30;
-    // 设置位图宽高，具体的宽高取ImageView和BitMap之间较小的一个，
-    // 即就是宽= min{ImageView.Width,Bitmap.Width},高同理
-    // 注意：当我们需要一个不同尺寸的验证码图片，不仅仅需要修改DEFAULT_WIDTH 和DEFAULT_HEIGHT,为了显示效果
-    // 的最佳化，最好将上述的4个坐标值也调整一下，使得我们的验证码能最恰当地占据整个底板
-
+    private static MathCaptchaUtil vCode;
+    int result;
     // 将一些常量应用到本类的成员变量上
     // settings decided by the layout xml
     // canvas width and height
     private int width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT;
-
+    // 设置位图宽高，具体的宽高取ImageView和BitMap之间较小的一个，
+    // 即就是宽= min{ImageView.Width,Bitmap.Width},高同理
+    // 注意：当我们需要一个不同尺寸的验证码图片，不仅仅需要修改DEFAULT_WIDTH 和DEFAULT_HEIGHT,为了显示效果
+    // 的最佳化，最好将上述的4个坐标值也调整一下，使得我们的验证码能最恰当地占据整个底板
     // random word space and pading_top
     private int base_padding_left = BASE_PADDING_LEFT, range_padding_left = RANGE_PADDING_LEFT,
             base_padding_top = BASE_PADDING_TOP, range_padding_top = RANGE_PADDING_TOP;
-
     // number of chars, lines; font size
     private int line_number = DEFAULT_LINE_NUMBER, font_size = DEFAULT_FONT_SIZE;
-
     // variables
     private String code;// 存储随机生成的随机码序列
     private int padding_left, padding_top;// 左边框间距和上边框间距
     private Random random = new Random();// 随机数生成器
 
-    public BufferedImage createBitmap() {// 得到位图对象
+    public static MathCaptchaUtil getInstance() {// 单例模式获取验证码对象
+        if (vCode == null)
+            vCode = new MathCaptchaUtil();
+        return vCode;
+    }
+
+    public Bitmap createBitmap() {// 得到位图对象
 
         padding_left = 0;// 设置位图左内边距离
 
-        BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
-//				BufferedImage.createBitmap(width, height, Config.ARGB_8888);// 创建位图
+        Bitmap bi = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);// 创建位图
         /**
          * 位图最后一个设置参数的简介 A：透明度 R：红色 G：绿 B：蓝 Bitmap.Config
          * ARGB_4444：每个像素占四位，即A=4，R=4，G=4，B=4，那么一个像素点占4+4+4+4=16位 Bitmap.Config
