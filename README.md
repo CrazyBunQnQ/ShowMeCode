@@ -8,10 +8,10 @@
 
 ## [LeetCode](https://leetcode.com)
 
-### [Algorithm](https://leetcode.com/problemset/algorithms/)
+### 1. [Algorithm](https://leetcode.com/problemset/algorithms/)
 
-#### [Easy Algorithm](https://github.com/CrazyBunQnQ/ShowMeCode/tree/master/src/main/java/com/crazybunqnq/leetcode/algorithm/easy)
+#### [My Easy Algorithm Exercises](https://github.com/CrazyBunQnQ/ShowMeCode/tree/master/src/main/java/com/crazybunqnq/leetcode/algorithm/easy)
 
-### [Database](https://leetcode.com/problemset/database/)
+### 2. [Database](https://leetcode.com/problemset/database/)
 
-#### [Easy Databse](https://github.com/CrazyBunQnQ/ShowMeCode/tree/master/src/main/java/com/crazybunqnq/leetcode/database/easy)
+#### [My Easy Databse Exercises](https://github.com/CrazyBunQnQ/ShowMeCode/tree/master/src/main/java/com/crazybunqnq/leetcode/database/easy)
