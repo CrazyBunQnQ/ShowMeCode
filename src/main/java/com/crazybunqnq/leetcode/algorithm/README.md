@@ -1,1 +1,1 @@
-Here are some algorithm exercises from [LeetCode](https://leetcode.com).
+Here are some algorithm exercises from [LeetCode](https://leetcode.com/problemset/algorithms).

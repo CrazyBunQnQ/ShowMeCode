@@ -1,0 +1,1 @@
+Here are some database exercises from [LeetCode](https://leetcode.com/problemset/database).
