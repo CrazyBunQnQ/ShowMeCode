@@ -48,6 +48,13 @@ public class PalindromeNumber {
         return newNum == oldNum;
     }
 
+    /**
+     * without the need of handling overflow
+     *
+     * @param x
+     *
+     * @return
+     */
     public boolean isPalindrome192ms(int x) {
         //排除小于零或以零结尾的数字
         if (x < 0 || (x != 0 && x % 10 == 0)) {
