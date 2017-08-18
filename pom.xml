@@ -24,7 +24,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.10</version>
         </dependency>
 
         <dependency>
@@ -44,8 +44,12 @@
             <artifactId>spring-core</artifactId>
             <version>4.3.9.RELEASE</version>
         </dependency>
-
         <!--安卓 SDK-->
+        <!--<dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>RELEASE</version>
+        </dependency>-->
     </dependencies>
 
 
