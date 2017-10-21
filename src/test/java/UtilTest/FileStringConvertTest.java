@@ -15,7 +15,7 @@ public class FileStringConvertTest {
 
     @Test
     public void test() throws IOException {
-        FileUtil.file2Text("/Users/baojunjie/Desktop/test", "old.exe");
-        FileUtil.text2File("/Users/baojunjie/Desktop/test", "target.exe");
+//        FileUtil.file2Text("/Users/baojunjie/Desktop/test/f2t.mp4","/Users/baojunjie/Desktop/test/f2t.txt",5000);
+        FileUtil.text2File("/Users/baojunjie/Desktop/test/f2t2.mp4","/Users/baojunjie/Desktop/test/f2t.txt");
     }
 }

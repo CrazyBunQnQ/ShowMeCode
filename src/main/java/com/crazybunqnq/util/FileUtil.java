@@ -10,7 +10,6 @@ import java.io.*;
  */
 @Log4j
 public class FileUtil {
-    private static final String tmp = "/Users/baojunjie/Desktop/test/tmp.txt";
 
     private FileUtil() {
     }
@@ -18,14 +17,14 @@ public class FileUtil {
     /**
      * 将文件转换成字符串数据放入文本
      *
-     * @param path
-     * @param name
+     * @param path    文件路径
+     * @param txtPath txt 文本路径
      *
      * @throws IOException
      */
-    public static void file2Text(String path, String name) throws IOException {
-        File inFile = new File(path + File.separator + name);
-        File writeTxt = new File(tmp);
+    public static void file2Text(String path, String txtPath) throws IOException {
+        File inFile = new File(path);
+        File writeTxt = new File(txtPath);
         if (!inFile.exists()) {
             System.out.println("文件不存在");
             return;
@@ -45,12 +44,8 @@ public class FileUtil {
         byte[] bys = new byte[1024];
         while ((len = fis.read(bys, 0, bys.length)) != -1) {
             StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < len; i++) {
-                if (i != 0)
-                    sb.append(",");
-                int b = bys[i];
-                sb.append(String.valueOf(b));
-            }
+            String str = byte2String(len, bys);
+            textWriter.write(str + "\r\n");
             textWriter.write(sb.toString() + "\r\n");
             System.out.println(sb.toString());
         }
@@ -59,16 +54,89 @@ public class FileUtil {
     }
 
     /**
-     * 将字符串文本重的数据转换成文件
+     * 将文件转换成字符串数据放入文本
      *
      * @param path
-     * @param name
+     * @param txtPath
+     * @param size    限制单个 txt 文件行数
      *
      * @throws IOException
      */
-    public static void text2File(String path, String name) throws IOException {
-        File outFile = new File(path + File.separator + name);
-        File writeTxt = new File(tmp);
+    public static void file2Text(String path, String txtPath, int size) throws IOException {
+        int m = 0;//记录当前 size
+        int n = 1;//记录文件名
+        boolean end = false;
+        String nameTmp;
+        String curTxtPath = "";
+        File inFile = new File(path);
+        if (!inFile.exists()) {
+            System.out.println("文件不存在");
+            return;
+        }
+        if (!inFile.isFile()) {
+            System.out.println("不是一个文件");
+            return;
+        }
+        FileInputStream fis = new FileInputStream(inFile);
+        String directory = txtPath.substring(0, txtPath.lastIndexOf(File.separator));
+        String name = txtPath.substring(txtPath.lastIndexOf(File.separator) + 1, txtPath.lastIndexOf("."));
+        System.out.println("目录：" + directory + ", 名称：" + name);
+        int len;//字节数组长度
+        File writeTxt = null;
+        BufferedWriter textWriter = null;
+
+        while (!end) {
+
+            nameTmp = curTxtPath;
+            curTxtPath = directory + File.separator + name + n + ".txt";
+            if (nameTmp != curTxtPath) {
+                writeTxt = new File(curTxtPath);
+                if (writeTxt.exists()) {
+                    writeTxt.delete();
+                }
+                writeTxt.createNewFile();
+                System.out.println("创建新文件：" + curTxtPath);
+                textWriter = new BufferedWriter(new FileWriter(writeTxt));
+            }
+
+            byte[] bys = new byte[1024];
+            while ((len = fis.read(bys, 0, bys.length)) != -1) {
+                String str = byte2String(len, bys);
+                textWriter.write(str + "\r\n");
+                m++;
+                if (m > size) {
+                    m = 0;
+                    break;
+                }
+            }
+            end = len == -1;
+            textWriter.close();
+            n++;
+        }
+        fis.close();
+    }
+
+    private static String byte2String(int len, byte[] bys) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < len; i++) {
+            if (i != 0)
+                sb.append(",");
+            int b = bys[i];
+            sb.append(String.valueOf(b));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 将字符串文本重的数据转换成文件
+     *
+     * @param path
+     *
+     * @throws IOException
+     */
+    public static void text2File(String path, String txtPath) throws IOException {
+        File outFile = new File(path);
+        File writeTxt = new File(txtPath);
         if (outFile.exists()) {
             outFile.delete();
         }
