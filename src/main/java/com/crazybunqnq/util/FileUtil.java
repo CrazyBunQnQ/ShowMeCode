@@ -41,13 +41,14 @@ public class FileUtil {
 
         FileInputStream fis = new FileInputStream(inFile);
         int len;
-        byte[] bys = new byte[1024];
+        byte[] bys = new byte[2048];
         while ((len = fis.read(bys, 0, bys.length)) != -1) {
             StringBuffer sb = new StringBuffer();
-            String str = byte2String(len, bys);
-            textWriter.write(str + "\r\n");
+            String str = bytes2HexString(len, bys);
+            textWriter.write(str);
             textWriter.write(sb.toString() + "\r\n");
-            System.out.println(sb.toString());
+//            System.out.println(sb.toString());
+//            System.out.println("bytes length: " + len);
         }
         fis.close();
         textWriter.close();
@@ -86,7 +87,6 @@ public class FileUtil {
         BufferedWriter textWriter = null;
 
         while (!end) {
-
             nameTmp = curTxtPath;
             curTxtPath = directory + File.separator + name + n + ".txt";
             if (nameTmp != curTxtPath) {
@@ -99,10 +99,10 @@ public class FileUtil {
                 textWriter = new BufferedWriter(new FileWriter(writeTxt));
             }
 
-            byte[] bys = new byte[1024];
+            byte[] bys = new byte[2048];
             while ((len = fis.read(bys, 0, bys.length)) != -1) {
-                String str = byte2String(len, bys);
-                textWriter.write(str + "\r\n");
+                String str = bytes2HexString(len, bys);
+                textWriter.write(str);
                 m++;
                 if (m > size) {
                     m = 0;
@@ -116,19 +116,9 @@ public class FileUtil {
         fis.close();
     }
 
-    private static String byte2String(int len, byte[] bys) {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < len; i++) {
-            if (i != 0)
-                sb.append(",");
-            int b = bys[i];
-            sb.append(String.valueOf(b));
-        }
-        return sb.toString();
-    }
 
     /**
-     * 将字符串文本重的数据转换成文件
+     * 将字符串文本中的数据转换成文件
      *
      * @param path
      *
@@ -148,17 +138,71 @@ public class FileUtil {
 
         FileOutputStream fos = new FileOutputStream(outFile);
         String line = textReader.readLine();
+        System.out.println("line length: " + line.length());
         while (line != null) {
-            String[] arr = line.split(",");
-            int len = arr.length;
-            byte[] bys = new byte[1024];
-            for (int i = 0; i < len; i++) {
-                bys[i] = (byte) Integer.parseInt(arr[i]);
-            }
-            fos.write(bys, 0, len);
+            byte[] bys = hexString2Bytes(line);
+            fos.write(bys, 0, bys.length);
             line = textReader.readLine();
         }
         fos.close();
         textReader.close();
+    }
+
+    /**
+     * 将字节数组中前 len 个字节转换成 16 进制字符串
+     *
+     * @param len
+     * @param bytes
+     *
+     * @return
+     */
+    public static String bytes2HexString(int len, byte[] bytes) {
+        final String HEX = "0123456789abcdef";
+        StringBuilder sb = new StringBuilder(bytes.length * 2);
+        for (int i = 0; i < len; i++) {
+            // 取出这个字节的高4位，然后与0x0f与运算，得到一个0-15之间的数据，通过HEX.charAt(0-15)即为16进制数
+            sb.append(HEX.charAt((bytes[i] >> 4) & 0x0f));
+            // 取出这个字节的低位，与0x0f与运算，得到一个0-15之间的数据，通过HEX.charAt(0-15)即为16进制数
+            sb.append(HEX.charAt(bytes[i] & 0x0f));
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * 将字节数组中前 len 个字节转换成字符串
+     *
+     * @param len
+     * @param bys
+     *
+     * @return
+     */
+    @Deprecated
+    private static String bytes2String(int len, byte[] bys) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < len; i++) {
+            if (i != 0)
+                sb.append(",");
+            int b = bys[i];
+            sb.append(String.valueOf(b));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 将 16 进制字符串转化为字节数组
+     *
+     * @param s
+     *
+     * @return
+     */
+    public static byte[] hexString2Bytes(String s) {
+        int len = s.length();
+        byte[] b = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            // 两位一组，表示一个字节,把这样表示的16进制字符串，还原成一个字节
+            b[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i + 1), 16));
+        }
+        return b;
     }
 }
