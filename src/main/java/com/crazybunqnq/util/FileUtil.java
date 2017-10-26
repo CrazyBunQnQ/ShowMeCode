@@ -23,6 +23,7 @@ public class FileUtil {
      * @throws IOException
      */
     public static void file2Text(String path, String txtPath) throws IOException {
+        long start = System.currentTimeMillis();
         File inFile = new File(path);
         File writeTxt = new File(txtPath);
         if (!inFile.exists()) {
@@ -43,15 +44,14 @@ public class FileUtil {
         int len;
         byte[] bys = new byte[2048];
         while ((len = fis.read(bys, 0, bys.length)) != -1) {
-            StringBuffer sb = new StringBuffer();
             String str = bytes2HexString(len, bys);
             textWriter.write(str);
-            textWriter.write(sb.toString() + "\r\n");
 //            System.out.println(sb.toString());
 //            System.out.println("bytes length: " + len);
         }
         fis.close();
         textWriter.close();
+        System.out.println("cost time: " + ((System.currentTimeMillis() - start) / 1000) + "s");
     }
 
     /**
@@ -158,7 +158,7 @@ public class FileUtil {
      */
     public static String bytes2HexString(int len, byte[] bytes) {
         final String HEX = "0123456789abcdef";
-        StringBuilder sb = new StringBuilder(bytes.length * 2);
+        StringBuffer sb = new StringBuffer();
         for (int i = 0; i < len; i++) {
             // 取出这个字节的高4位，然后与0x0f与运算，得到一个0-15之间的数据，通过HEX.charAt(0-15)即为16进制数
             sb.append(HEX.charAt((bytes[i] >> 4) & 0x0f));
@@ -204,5 +204,39 @@ public class FileUtil {
             b[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i + 1), 16));
         }
         return b;
+    }
+
+    /**
+     * 合并 txt
+     *
+     * @param path
+     */
+    public static void mergeTxt(String path) throws IOException {
+        File newFile = new File(path);
+        if (newFile.exists()) {
+            newFile.delete();
+        }
+        newFile.createNewFile();
+        FileWriter fw = new FileWriter(newFile, true);
+        PrintWriter pw = new PrintWriter(fw);
+        String dic = path.substring(0, path.lastIndexOf(File.separator) + 1);
+        String name = path.substring(path.lastIndexOf(File.separator) + 1, path.lastIndexOf("."));
+        System.out.println("dic: " + dic + "  name:" + name);
+        int n = 1;
+        String newPath = dic + name + n + ".txt";
+        File file = new File(newPath);
+        while (file.exists()) {
+            BufferedReader textReader = new BufferedReader(new FileReader(file));
+            String str = textReader.readLine();
+            pw.print(str);
+            textReader.close();
+            n++;
+            newPath = dic + name + n + ".txt";
+            file = new File(newPath);
+        }
+        pw.flush();
+        fw.flush();
+        pw.close();
+        fw.close();
     }
 }
