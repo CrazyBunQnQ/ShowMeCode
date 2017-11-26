@@ -138,10 +138,11 @@ public class FileUtil {
 
         FileOutputStream fos = new FileOutputStream(outFile);
         String line = textReader.readLine();
-        System.out.println("line length: " + line.length());
         while (line != null) {
+            System.out.println("read line length: " + line.length());
             byte[] bys = hexString2Bytes(line);
             fos.write(bys, 0, bys.length);
+            fos.flush();
             line = textReader.readLine();
         }
         fos.close();
@@ -228,7 +229,10 @@ public class FileUtil {
         while (file.exists()) {
             BufferedReader textReader = new BufferedReader(new FileReader(file));
             String str = textReader.readLine();
-            pw.print(str);
+            while (str != null) {
+                pw.println(str);
+                str = textReader.readLine();
+            }
             textReader.close();
             n++;
             newPath = dic + name + n + ".txt";
