@@ -24,6 +24,11 @@ public class Integer2Roman {
         log.info(intToRoman95ms(1884));
     }
 
+    /**
+     * 将 1~3999 的整数转化成罗马数字
+     * @param num 待转化数字
+     * @return boolean
+     */
     public String intToRoman(int num) {
         int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
         String[] strs = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
@@ -39,8 +44,13 @@ public class Integer2Roman {
         return sb.toString();
     }
 
+    /**
+     * 将 1~3999 的数字转换成罗马数字
+     * @param num 待转化的数字
+     * @return 罗马数字
+     */
     public String intToRoman95ms(int num) {
-        Map<String, Integer> romanMap = new HashMap<String, Integer>();
+        Map<String, Integer> romanMap = new HashMap<>();
         romanMap.put("M", 1000);
         romanMap.put("D", 500);
         romanMap.put("C", 100);
@@ -48,7 +58,7 @@ public class Integer2Roman {
         romanMap.put("X", 10);
         romanMap.put("V", 5);
         romanMap.put("I", 1);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String[] roman = {"M", "D", "C", "L", "X", "V", "I"};
 
         while (num > 0) {
@@ -82,11 +92,11 @@ public class Integer2Roman {
     /**
      * 判断罗马数字字符是否为 C X I 之一
      *
-     * @param s
+     * @param s 罗马字符
      *
-     * @return
+     * @return boolean
      */
-    public boolean isCXI(String s) {
+    private boolean isCXI(String s) {
         return "I".equals(s) || "X".equals(s) || "C".equals(s);
     }
 }
