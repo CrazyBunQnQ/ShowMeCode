@@ -19,17 +19,29 @@ public class Integer2Roman {
 
     @Test
     public void test() {
-        log.info(intToRoman(1894));
+        log.info(intToRoman94ms(1894));
+        log.info(intToRoman140ms(1894));
         log.info(intToRoman95ms(9));
         log.info(intToRoman95ms(1884));
     }
 
+    public String intToRoman94ms(int num) {
+        String[] romanPieces = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX",
+                "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC",
+                "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM",
+                "", "M", "MM", "MMM", "MMMM"};
+        return romanPieces[num / 1000 + 30] + romanPieces[(num / 100) % 10 + 20]
+                + romanPieces[(num / 10) % 10 + 10] + romanPieces[num % 10];
+    }
+
     /**
      * 将 1~3999 的整数转化成罗马数字
+     *
      * @param num 待转化数字
+     *
      * @return boolean
      */
-    public String intToRoman(int num) {
+    public String intToRoman140ms(int num) {
         int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
         String[] strs = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
@@ -46,7 +58,9 @@ public class Integer2Roman {
 
     /**
      * 将 1~3999 的数字转换成罗马数字
+     *
      * @param num 待转化的数字
+     *
      * @return 罗马数字
      */
     public String intToRoman95ms(int num) {
