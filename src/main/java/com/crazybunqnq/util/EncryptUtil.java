@@ -22,7 +22,8 @@ public class EncryptUtil {
         if (str.length() != num.length()) {
             return "The length of the string should be the same as the length of the number.";
         }
-        String result = message.toUpperCase();
+//        String result = message.toUpperCase();
+        String result = message;
         String tmp = "";
         for (int i = 0; i < str.length(); i++) {
             int n = Integer.valueOf(String.valueOf(num.charAt(i)));
@@ -50,7 +51,8 @@ public class EncryptUtil {
         if (str.length() != num.length()) {
             return "The length of the string should be the same as the length of the number.";
         }
-        String result = message.toUpperCase();
+//        String result = message.toUpperCase();
+        String result = message;
         String tmp = "";
         for (int i = str.length() - 1; i >= 0; i--) {
             int n = Integer.valueOf(String.valueOf(num.charAt(i)));
@@ -71,11 +73,5 @@ public class EncryptUtil {
 
     private static char byteToChar(byte b) {
         return "0123456789ABCDEF".charAt(b);
-    }
-
-    private void test() {
-//        System.out.println();
-//        System.out.println("9:  9 → ( 9 + 118 % 16) % 16 = " + ( 9 + 118 % 16) % 16 + " → " + String.valueOf(byteToChar((byte) 15)));
-//        System.out.println("F: 15 → (15 - 118 % 16) % 16 = " + (15 + 16 - 118 % 16) % 16 + " → " + String.valueOf(byteToChar((byte) 11)));
     }
 }

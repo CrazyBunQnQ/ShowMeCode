@@ -10,11 +10,15 @@ import org.junit.Test;
 public class EncryptUtilTest {
     @Test
     public void test() {
-        String str = "A19DF7CB3BAB397A9C8";
+        String str = "8wnuXAaU34JN8AdpzyXybnxQqw8i7c7x3BCX7CZmkddupufzD3HoAxfzaZVQQqGx";
         System.out.println("input: " + str);
-        String newStr = EncryptUtil.simpleEncryption(str, "chengyongyue", "199205312357");
+        String newStr = EncryptUtil.simpleEncryption(str, "MyFriend", "19930717").toLowerCase();
         System.out.println("ouput: " + newStr);
-        String oldStr = EncryptUtil.simpleDecryption(newStr, "chengyongyue", "199205312357");
+        String oldStr = EncryptUtil.simpleDecryption(newStr, "MyFriend", "19930717").toLowerCase();
         System.out.println("oldst: " + oldStr);
+
+        System.out.println(str.equalsIgnoreCase(oldStr)?"测试成功":"解密失败");
+
+//        Object proxyObject = Proxy.newProxyInstance()
     }
 }
