@@ -1,7 +1,7 @@
 package designmodle.proxy;
 
-import com.crazybunqnq.designpattern.proxy.statics.RealSubject;
-import com.crazybunqnq.designpattern.proxy.statics.StaticProxy;
+import com.crazybunqnq.designpattern.proxy_statics.RealSubject;
+import com.crazybunqnq.designpattern.proxy_statics.StaticProxy;
 import org.junit.Test;
 
 /**

@@ -1,4 +1,4 @@
-package com.crazybunqnq.designpattern.factory.simple;
+package com.crazybunqnq.designpattern.factory_simple;
 
 /**
  * @version 2018/5/1.

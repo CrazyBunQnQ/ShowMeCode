@@ -1,4 +1,4 @@
-package com.crazybunqnq.designpattern.proxy.dynamic;
+package com.crazybunqnq.designpattern.proxy_dynamic;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

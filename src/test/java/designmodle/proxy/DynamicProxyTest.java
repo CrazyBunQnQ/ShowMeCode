@@ -1,8 +1,8 @@
 package designmodle.proxy;
 
-import com.crazybunqnq.designpattern.proxy.dynamic.MyInvocationHandler;
-import com.crazybunqnq.designpattern.proxy.dynamic.RealSubject;
-import com.crazybunqnq.designpattern.proxy.dynamic.Subject;
+import com.crazybunqnq.designpattern.proxy_dynamic.MyInvocationHandler;
+import com.crazybunqnq.designpattern.proxy_dynamic.RealSubject;
+import com.crazybunqnq.designpattern.proxy_dynamic.Subject;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;

@@ -1,4 +1,4 @@
-package com.crazybunqnq.designpattern.proxy.statics;
+package com.crazybunqnq.designpattern.proxy_statics;
 
 /**
  * 目标对象与代理类共同的接口

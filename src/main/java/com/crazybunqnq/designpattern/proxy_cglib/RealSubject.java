@@ -1,4 +1,4 @@
-package com.crazybunqnq.designpattern.proxy.cglib;
+package com.crazybunqnq.designpattern.proxy_cglib;
 
 /**
  * 目标对象，没有实现任何接口

@@ -1,4 +1,4 @@
-package com.crazybunqnq.designpattern.proxy.statics;
+package com.crazybunqnq.designpattern.proxy_statics;
 
 /**
  * 静态代理类，实现 Subject 接口

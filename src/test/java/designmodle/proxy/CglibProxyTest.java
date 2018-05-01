@@ -1,7 +1,7 @@
 package designmodle.proxy;
 
-import com.crazybunqnq.designpattern.proxy.cglib.ProxyFactory;
-import com.crazybunqnq.designpattern.proxy.cglib.RealSubject;
+import com.crazybunqnq.designpattern.proxy_cglib.ProxyFactory;
+import com.crazybunqnq.designpattern.proxy_cglib.RealSubject;
 import org.junit.Test;
 
 /**

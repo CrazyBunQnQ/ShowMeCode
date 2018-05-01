@@ -1,4 +1,4 @@
-package com.crazybunqnq.designpattern.proxy.cglib;
+package com.crazybunqnq.designpattern.proxy_cglib;
 
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;

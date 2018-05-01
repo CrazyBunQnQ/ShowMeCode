@@ -1,7 +1,7 @@
 package designmodle.factory;
 
-import com.crazybunqnq.designpattern.factory.simple.Shape;
-import com.crazybunqnq.designpattern.factory.simple.ShapeFactory;
+import com.crazybunqnq.designpattern.factory_simple.Shape;
+import com.crazybunqnq.designpattern.factory_simple.ShapeFactory;
 import org.junit.Test;
 
 /**
