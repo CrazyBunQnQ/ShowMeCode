@@ -45,12 +45,14 @@ public class ConsecutiveNumbersSum {
         int a1;//首项
         int an;//末项
         int d;//公差
-        int sum;//和
+        int Sn;//和
 
-        while (n <= Math.ceil((double) N / 2)) {
+//        while (n <= Math.ceil((double) N / 2)) {
+        while (n <= Math.ceil((double) N / 2) && (double) N / n / n > 0.4) {
             // 首项加末项一定是整数
             if (N * 2 % n != 0) {
                 n++;
+//                System.out.println("n = " + n + "    Sn/n = " + N / n + "    Sn/n/n = " + (double) N / n / n);
                 continue;
             }
             int am = N / n;//是中间数
@@ -58,11 +60,13 @@ public class ConsecutiveNumbersSum {
                 int m = (n - 1) / 2;//中间数下标
                 if (m == 0) {//下标必须是整数
                     n++;
+//                    System.out.println("n = " + n + "    Sn/n = " + N / n + "    Sn/n/n = " + (double) N / n / n);
                     continue;
                 }
                 a1 = am - m;
                 if (a1 <= 0) {
                     n++;
+//                    System.out.println("n = " + n + "    Sn/n = " + N / n + "    Sn/n/n = " + (double) N / n / n);
                     continue;
                 }
                 an = am + m;
@@ -71,23 +75,25 @@ public class ConsecutiveNumbersSum {
                 a1 = am - m1;
                 if (a1 <= 0) {
                     n++;
+//                    System.out.println("n = " + n + "    Sn/n = " + N / n + "    Sn/n/n = " + (double) N / n / n);
                     continue;
                 }
                 an = am + 1 + m1;
             }
-            sum = (a1 + an) * n / 2;
+            Sn = (a1 + an) * n / 2;
             d = (an - a1) / (n - 1);
-            n++;
-            if (N == sum && d == 1) {
+            if (N == Sn && d == 1) {
                 result++;
             }
+            n++;
+//            System.out.println("n = " + n + "    Sn/n = " + N / n + "    Sn/n/n = " + (double) N / n / n);
         }
         return result;
     }
 
     @Test
     public void test() {
-        for (int i = 1; i <= Math.pow(10, 9); i = i + (int) (Math.random() * 100)) {
+        for (int i = 1; i <= Math.pow(10, 9); i = i + (int) (Math.random() * 10000)) {
             TimeUtil.setCurrentTime();
             System.out.println("N = " + i + ": " + consecutiveNumbersSum(i) + "个，耗时 " + TimeUtil.runTime() + " 毫秒");
         }
@@ -109,6 +115,18 @@ public class ConsecutiveNumbersSum {
         System.out.println("N = 16: " + consecutiveNumbersSum(16) + "；应该是 2");
         System.out.println("N = 17: " + consecutiveNumbersSum(17) + "；应该是 2");
         System.out.println("N = 18: " + consecutiveNumbersSum(18) + "；应该是 2");
-        System.out.println("N = 19: " + consecutiveNumbersSum(19) + "；应该是 2");*/
+        System.out.println("N = 19: " + consecutiveNumbersSum(19) + "；应该是 2");
+        TimeUtil.setCurrentTime();
+        System.out.println("N = 3772593: " + consecutiveNumbersSum(3772593) + "；应该是 24，原耗时 10 毫秒，本次耗时 " + TimeUtil.runTime() + " 毫秒");
+        TimeUtil.setCurrentTime();
+        System.out.println("N = 120034350: " + consecutiveNumbersSum(120034350) + "；应该是 35，原耗时 10 毫秒，本次耗时 " + TimeUtil.runTime() + " 毫秒");
+        TimeUtil.setCurrentTime();
+        System.out.println("N = 119609750: " + consecutiveNumbersSum(119609750) + "；应该是 45，原耗时 10 毫秒，本次耗时 " + TimeUtil.runTime() + " 毫秒");
+        TimeUtil.setCurrentTime();
+        System.out.println("N = 119612350: " + consecutiveNumbersSum(119612350) + "；应该是 23，原耗时 10 毫秒，本次耗时 " + TimeUtil.runTime() + " 毫秒");
+        TimeUtil.setCurrentTime();
+        System.out.println("N = 119623491: " + consecutiveNumbersSum(119623491) + "；应该是 46，原耗时 10 毫秒，本次耗时 " + TimeUtil.runTime() + " 毫秒");
+        TimeUtil.setCurrentTime();
+        System.out.println("N = 119634975: " + consecutiveNumbersSum(119634975) + "；应该是 70，原耗时 10 毫秒，本次耗时 " + TimeUtil.runTime() + " 毫秒");*/
     }
 }
