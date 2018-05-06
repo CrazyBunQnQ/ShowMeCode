@@ -32,8 +32,8 @@ import java.util.List;
  * <p>
  * Note:  1 <= S.length <= 1000
  *
- * @Score 3
  * @version 2018/5/6.
+ * @Score 3
  * @auther CrazyBunQnQ
  */
 public class PositionsOfLargeGroups {
@@ -70,11 +70,11 @@ public class PositionsOfLargeGroups {
 
     @Test
     public void test() {
-//        System.out.println(largeGroupPositions("a"));
+        System.out.println(largeGroupPositions("a"));
         String s1000 = "abbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzyaabbxxxxzzy";
         System.out.println(s1000.length());
         System.out.println(largeGroupPositions(s1000));
-//        System.out.println(largeGroupPositions("abcdddeeeeaabbbcd"));
-//        System.out.println(largeGroupPositions("abcdddeeeeaabbbcddd"));
+        System.out.println(largeGroupPositions("abcdddeeeeaabbbcd"));
+        System.out.println(largeGroupPositions("abcdddeeeeaabbbcddd"));
     }
 }
