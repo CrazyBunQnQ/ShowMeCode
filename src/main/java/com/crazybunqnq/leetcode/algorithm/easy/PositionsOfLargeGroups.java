@@ -45,8 +45,6 @@ public class PositionsOfLargeGroups {
             if (tmp == 0) {
                 start = i - 1;
             }
-            char s1 = S.charAt(i - 1);
-            char s2 = S.charAt(i);
             if (S.charAt(i) == S.charAt(i - 1)) {
                 tmp++;
                 if (tmp >= 2 && i == S.length() - 1) {

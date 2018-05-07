@@ -91,6 +91,39 @@ public class ConsecutiveNumbersSum {
         return result;
     }
 
+    /**
+     * The thought process goes like this- Given a number N, we can possibly write it as a sum of 2 numbers, 3 numbers, 4 numbers and so on. Let's assume the fist number in this series be x. Hence, we should have
+     * x + (x+1) + (x+2)+...+ n terms = N
+     * nx + n*(n-1)/2 = N implies
+     * nx = N - n*(n-1)/2
+     * So, we can calculate the RHS for every value of n and if it is a multiple of n then we can construct a sum of N using n terms starting from x.
+     * Now, the question arises, till what value of n should we loop for? That's easy. In the worst case, RHS should be greater than 0. That is
+     * N - n*(n-1)/2 > 0 which implies
+     * n*(n-1) < 2N which can be approximated to
+     * n*n < 2N ==> n < sqrt(2N)
+     * Hence the overall complexity of the algorithm is O(sqrt(N))
+     * <p>
+     * PS: OJ expects the answer to be 1 greater than the number of possible ways because it considers N as being written as N itself. It's confusing since they ask for sum of consecutive integers which implies atleast 2 numbers. But to please OJ, we should start count from 1.
+     *
+     * @param N
+     *
+     * @return
+     */
+    public int consecutiveNumbersSumClear(int N) {
+        int count = 1;
+        for (int n = 2; n < Math.sqrt(2 * N); n++) {
+            if ((N - (n * (n - 1) / 2)) % n == 0) count++;
+        }
+        return count;
+    }
+
+    public int consecutiveNumbersSum4Lines(int N) {
+        int ans = 0;
+        for (int i = 1, n = N - 1; n >= 0; n -= ++i)
+            if ((n % i) == 0) ans++;
+        return ans;
+    }
+
     @Test
     public void test() {
         for (int i = 1; i <= Math.pow(10, 9); i = i + (int) (Math.random() * 10000)) {

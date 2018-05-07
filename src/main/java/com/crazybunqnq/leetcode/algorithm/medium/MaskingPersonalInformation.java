@@ -73,6 +73,8 @@ import java.util.regex.Pattern;
  * @auther CrazyBunQnQ
  */
 public class MaskingPersonalInformation {
+    String[] country = {"", "+*-", "+**-", "+***-"};
+
     /**
      * If the string is a email then it will be mosaic
      */
@@ -118,6 +120,16 @@ public class MaskingPersonalInformation {
             return result;
         }
         return null;
+    }
+
+    public String maskPII_EasyAndConcise(String S) {
+        int at = S.indexOf("@");
+        if (at > 0) {
+            S = S.toLowerCase();
+            return (S.charAt(0) + "*****" + S.substring(at - 1)).toLowerCase();
+        }
+        S = S.replaceAll("[^0-9]", "");
+        return country[S.length() - 10] + "***-***-" + S.substring(S.length() - 4);
     }
 
     @Test
