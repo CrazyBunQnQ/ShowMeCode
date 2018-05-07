@@ -1,4 +1,4 @@
-package com.crazybunqnq.leetcode.contest;
+package com.crazybunqnq.leetcode.algorithm.easy;
 
 import org.junit.Test;
 

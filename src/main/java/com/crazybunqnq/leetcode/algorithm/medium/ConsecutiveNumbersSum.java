@@ -1,4 +1,4 @@
-package com.crazybunqnq.leetcode.contest;
+package com.crazybunqnq.leetcode.algorithm.medium;
 
 import com.crazybunqnq.util.TimeUtil;
 import org.junit.Test;
