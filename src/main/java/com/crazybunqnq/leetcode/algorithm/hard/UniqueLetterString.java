@@ -1,5 +1,7 @@
 package com.crazybunqnq.leetcode.algorithm.hard;
 
+import org.junit.Test;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,13 +43,10 @@ import java.util.Set;
  * @auther CrazyBunQnQ
  */
 public class UniqueLetterString {
-    public int uniqueLetterString(String S) {
-        int result = 0;
-        // find repeat chars
+    public String[] getDittograms(String S) {
         int size = 0;
         StringBuilder sb = new StringBuilder();
         Set<Character> subChars = new HashSet<Character>();
-        // Set<Character> dittogram = new HashSet<Character>();
         for (int i = 0; i < S.length(); i++) {
             Character c = S.charAt(i);
             subChars.add(c);
@@ -63,9 +62,28 @@ public class UniqueLetterString {
             String rex = sb.toString();
             S = S.replaceAll(rex, "-");
         }
-        System.out.println(S);
+        return S.split("-");
+    }
 
+    public int calLength(String subS) {
+        int result = 0;
 
         return result;
+    }
+
+    public int uniqueLetterString(String S) {
+        int result = 0;
+        String[] dittograms = getDittograms(S);
+        for (int i = 0; i < dittograms.length; i++) {
+            result += calLength(dittograms[i]);
+        }
+        return result;
+    }
+
+    @Test
+    public void test() {
+        uniqueLetterString("ABC");
+        uniqueLetterString("ABA");
+        uniqueLetterString("ABCDFFEMQQQQNA");
     }
 }
