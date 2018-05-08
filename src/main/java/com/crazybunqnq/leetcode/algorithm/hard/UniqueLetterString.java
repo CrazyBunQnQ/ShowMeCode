@@ -64,7 +64,7 @@ public class UniqueLetterString {
     }
 
     public int uniqueLetterString(String S) {
-        int result = S.length() + uniq(S);
+        int result = S.length() == 1 ? 1 : S.length() + uniq(S);
         for (int length = 2; length < S.length(); length++) {
             for (int start = 0; start <= S.length() - length; start++) {
                 String subS = S.substring(start, start + length);
