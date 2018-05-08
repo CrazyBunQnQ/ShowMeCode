@@ -1,5 +1,6 @@
 package com.crazybunqnq.leetcode.algorithm.hard;
 
+import com.crazybunqnq.util.TimeUtil;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -51,8 +52,12 @@ public class UniqueLetterString {
             Character c = S.charAt(i);
             subChars.add(c);
             if (subChars.size() == size) {
-                if (sb.indexOf(c + "") == -1)
+                if (sb.indexOf(c + "") == -1) {
                     sb.append(sb.length() == 0 ? "[" + c : c);
+                    if (sb.length() >= 27) {
+                        break;
+                    }
+                }
             } else {
                 size++;
             }
@@ -76,10 +81,13 @@ public class UniqueLetterString {
 
     @Test
     public void test() {
-        uniqueLetterString("ABC");
-        uniqueLetterString("ABCD");
-        uniqueLetterString("ABA");
-        uniqueLetterString("ABCDFFEMQQQQNA");
-
+        System.out.println("A: " + uniqueLetterString("A"));
+        System.out.println("ABC: " + uniqueLetterString("ABC"));
+        System.out.println("ABCD: " + uniqueLetterString("ABCD"));
+        System.out.println("ABA: " + uniqueLetterString("ABA"));
+        System.out.println("ABCDFFEMQQQQNA: " + uniqueLetterString("ABCDFFEMQQQQNA"));
+        TimeUtil.setCurrentTime();
+        System.out.println(uniqueLetterString("DELQGVWNZKIJJPSXOVWWIZUXCEGWSQLESNSRBMKZARFPAXSVWQEZDENDAHNNIBHGHTFDLPGDLFXMIYRFNLMXHNPIFUAXINXPXLCTTJNLGGMKJIOEWBECNOFQPVCIKIAZMNGHEHFMCPWSMJTMGVSXTOGCGUYKFMNCGLCBRAFJLJVPIVDOLJBURULPGXBVDCEWXXXLTRMSHPKSPFDGNVOCZWDXJUWVNAREDOKTZMIUDKDQWWWSAEUUDBHMWZELOSBIHMAYJEMGZPMDOOGSCKLVHTGMETHUISCLJKDOQEWGVBULEMUXGTRKGXYFDIZTZWMLOFTCANBGUARNWQEQWGMIKMORVQUZANJNRNPMJWYLVHWKDFLDDBBMILAKGFROEQAMEVONUVHOHGPKLBPNYZFPLXNBCIFENCGIMIDCXIIQJWPVVCOCJTSKSHVMQJNLHSQTEZQTTMOXUSKBMUJEJDBJQNXECJGSZUDENJCPTTSREKHPRIISXMWBUGMTOVOTRKQCFSDOTEFPSVQINYLHXYVZTVAMWGPNKIDLOPGAMWSKDXEPLPPTKUHEKBQAWEBMORRZHBLOGIYLTPMUVBPGOOOIEBJEGTKQKOUURHSEJCMWMGHXYIAOGKJXFAMRLGTPNSLERNOHSDFSSFASUJTFHBDMGBQOKZRBRAZEQQVWFRNUNHBGKRFNBETEDJIWCTUBJDPFRRVNZENGRANELPHSDJLKVHWXAXUTMPWHUQPLTLYQAATEFXHZARFAUDLIUDEHEGGNIYICVARQNRJJKQSLXKZZTFPVJMOXADCIGKUXCVMLPFJGVXMMBEKQXFNXNUWOHCSZSEZWZHDCXPGLROYPMUOBDFLQMTTERGSSGVGOURDWDSEXONCKWHDUOVDHDESNINELLCTURJHGCJWVIPNSISHRWTFSFNRAHJAJNNXKKEMESDWGIYIQQRLUUADAXOUEYURQRVZBCSHXXFLYWFHDZKPHAGYOCTYGZNPALAUZSTOU") + "  耗时 " + TimeUtil.runTime() + " 毫秒");
+        System.out.println();
     }
 }
