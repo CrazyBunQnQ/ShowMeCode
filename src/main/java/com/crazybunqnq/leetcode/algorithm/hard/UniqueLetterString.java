@@ -43,7 +43,7 @@ import java.util.Set;
  * @auther CrazyBunQnQ
  */
 public class UniqueLetterString {
-    public String[] getDittograms(String S) {
+    public int uniq(String S) {
         int size = 0;
         StringBuilder sb = new StringBuilder();
         Set<Character> subChars = new HashSet<Character>();
@@ -57,37 +57,19 @@ public class UniqueLetterString {
                 size++;
             }
         }
-        if (sb.length() > 0) {
-            sb.append("]+");
-            String rex = sb.toString();
-            S = S.replaceAll(rex, "-");
-        }
-        return S.split("-");
-    }
-
-    /**
-     * ABCD
-     * <p>
-     * 1+2+3+4 = 10
-     * <p>
-     * case A B C D AB BC CD ABC BCD ABCD
-     * <p>
-     * length 1*4 2*3 3*2 4*1
-     */
-    public int calLength(String subS) {
-        int result = 0;
-        for (int i = 0; i < subS.length(); i++) {
-            result += (i + 1) * (subS.length() - i);
-        }
-        return result;
+        sb.append("]+");
+        String rex = sb.toString();
+        S = S.replaceAll(rex, "");
+        return S.length();
     }
 
     public int uniqueLetterString(String S) {
-        int result = 0;
-        String[] dittograms = getDittograms(S);
-        for (int i = 0; i < dittograms.length; i++) {
-            System.out.println(dittograms[i] + ":");
-            result += calLength(dittograms[i]);
+        int result = S.length() + uniq(S);
+        for (int length = 2; length < S.length(); length++) {
+            for (int start = 0; start <= S.length() - length; start++) {
+                String subS = S.substring(start, start + length);
+                result += uniq(subS);
+            }
         }
         return result;
     }
@@ -95,7 +77,9 @@ public class UniqueLetterString {
     @Test
     public void test() {
         uniqueLetterString("ABC");
+        uniqueLetterString("ABCD");
         uniqueLetterString("ABA");
         uniqueLetterString("ABCDFFEMQQQQNA");
+
     }
 }
