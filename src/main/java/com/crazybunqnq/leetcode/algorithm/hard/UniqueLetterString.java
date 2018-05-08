@@ -65,9 +65,20 @@ public class UniqueLetterString {
         return S.split("-");
     }
 
+    /**
+     * ABCD
+     * <p>
+     * 1+2+3+4 = 10
+     * <p>
+     * case A B C D AB BC CD ABC BCD ABCD
+     * <p>
+     * length 1*4 2*3 3*2 4*1
+     */
     public int calLength(String subS) {
         int result = 0;
-
+        for (int i = 0; i < subS.length(); i++) {
+            result += (i + 1) * (subS.length() - i);
+        }
         return result;
     }
 
@@ -75,6 +86,7 @@ public class UniqueLetterString {
         int result = 0;
         String[] dittograms = getDittograms(S);
         for (int i = 0; i < dittograms.length; i++) {
+            System.out.println(dittograms[i] + ":");
             result += calLength(dittograms[i]);
         }
         return result;
