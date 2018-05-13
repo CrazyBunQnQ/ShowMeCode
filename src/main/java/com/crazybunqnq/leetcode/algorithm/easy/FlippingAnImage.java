@@ -37,6 +37,10 @@ public class FlippingAnImage {
             int i = 0;
             int j = A[x].length - 1;
             while (j >= i) {
+                if (i == j) {
+                    result[x][j] = 1 - A[x][i];
+                    break;
+                }
                 result[x][j] = 1 - A[x][i];
                 result[x][i] = 1 - A[x][j];
                 j--;
@@ -68,7 +72,7 @@ public class FlippingAnImage {
 //              {0, 0, 0, 1},
 //              {1, 0, 1, 0}};
 
-        int[][] B = {{1, 1, 0},//011
+        int[][] B = {{1, 1, 0},//100
                 {1, 0, 1},//010
                 {0, 0, 0}};//111
 
