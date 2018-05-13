@@ -40,21 +40,28 @@ public class FindAndReplaceInString {
         String tmp = "";
         for (int i = 0; i < indexes.length; i++) {
             tmp = S.substring(indexes[i]);
-            S = S.substring(0, indexes[i]) + tmp.replaceAll(sources[i], i + "");
+            StringBuilder rep = new StringBuilder("'");
+            for (int j = 0; j < sources.length; j++) {
+                rep.append(i + "");
+            }
+            rep.append("'");
+            S = S.substring(0, indexes[i]) + tmp.replaceAll(sources[i], rep.toString());
             System.out.println(S);
         }
         for (int i = 0; i < indexes.length; i++) {
-            S = S.replaceAll(i + "", targets[i]);
+            String rex = "'(" + i + ")+'";
+            S = S.replaceAll(rex, targets[i]);
         }
         return S;
     }
 
     @Test
     public void test() {
-        int[] indexes = {0, 2};
-        String[] sources = {"a", "cd"};
-        String[] targets = {"eee", "ffff"};
-        System.out.println(findReplaceString("abcd", indexes, sources, targets));
+        String S = "vyeqmeyggv";
+        int[] indexes = {4, 0, 7};
+        String[] sources = {"mey", "vye", "ggv"};
+        String[] targets = {"bq", "aa", "aqq"};
+        System.out.println(findReplaceString(S, indexes, sources, targets));
 
     }
 }
