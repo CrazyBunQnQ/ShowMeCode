@@ -28,17 +28,17 @@ import org.junit.Test;
  */
 public class RectangleOverlap {
     public boolean isRectangleOverlap(int[] rec1, int[] rec2) {
-        boolean a = rec1[0] > rec2[0] && rec1[0] < rec2[2];
-        boolean b = rec1[2] > rec2[0] && rec1[2] < rec2[2];
-        boolean c = rec1[1] > rec2[1] && rec1[1] < rec2[3];
-        boolean d = rec1[3] > rec2[1] && rec1[3] < rec2[3];
-        System.out.println(a + " " + b + " " + c + " " + d);
-        return (a || b) && (c || d);
+        int leftDownX = rec1[0] > rec2[0] ? rec1[0] : rec2[0];
+        int leftDownY = rec1[1] > rec2[1] ? rec1[1] : rec2[1];
+        int rightUpX = rec1[2] < rec2[2] ? rec1[2] : rec2[2];
+        int rightUpY = rec1[3] < rec2[3] ? rec1[3] : rec2[3];
+        int s = (rightUpX - leftDownX) * (rightUpY - leftDownY);
+        System.out.println(s);
+        return s > 0;
     }
 
     @Test
     public void test() {
-
         int[] rec1 = {0, 0, 2, 2};
         int[] rec2 = {1, 1, 3, 3};
         System.out.println(isRectangleOverlap(rec1, rec2));
