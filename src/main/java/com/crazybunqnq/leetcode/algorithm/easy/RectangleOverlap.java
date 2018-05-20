@@ -47,7 +47,7 @@ public class RectangleOverlap {
      *
      * @return
      */
-    public int RectangleOverlapArea(int[] rec1, int[] rec2) {
+    public int rectangleOverlapArea(int[] rec1, int[] rec2) {
         //The area can only be calculated accurately when they intersects.
         if (!isRectangleOverlap(rec1, rec2)) {
             return 0;
@@ -58,6 +58,21 @@ public class RectangleOverlap {
         int rightUpY = rec1[3] < rec2[3] ? rec1[3] : rec2[3];
         int s = (rightUpX - leftDownX) * (rightUpY - leftDownY);
         return s;
+    }
+
+    /**
+     * Calculate the total area of ​​two rectangles at the intersection
+     *
+     * @param rec1
+     * @param rec2
+     *
+     * @return
+     */
+    public int rectangleTotalArea(int[] rec1, int[] rec2) {
+        int s1 = (rec1[2] - rec1[0]) * (rec1[3] - rec1[1]);
+        int s2 = (rec2[2] - rec2[0]) * (rec2[3] - rec2[1]);
+        int totalS = s1 + s2;
+        return totalS - rectangleOverlapArea(rec1, rec2);
     }
 
     @Test
