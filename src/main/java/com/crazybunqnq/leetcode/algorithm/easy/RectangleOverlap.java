@@ -28,13 +28,25 @@ import org.junit.Test;
  */
 public class RectangleOverlap {
     public boolean isRectangleOverlap(int[] rec1, int[] rec2) {
+        return !(rec1[0] >= rec2[2] || rec1[1] >= rec2[3] || rec1[2] <= rec2[0] || rec1[3] <= rec2[1]);
+    }
+
+    /**
+     * Calculate the area of the two rectangles overlapping.
+     *
+     * @param rec1
+     * @param rec2
+     *
+     * @return
+     */
+    public int RectangleOverlapArea(int[] rec1, int[] rec2) {
         int leftDownX = rec1[0] > rec2[0] ? rec1[0] : rec2[0];
         int leftDownY = rec1[1] > rec2[1] ? rec1[1] : rec2[1];
         int rightUpX = rec1[2] < rec2[2] ? rec1[2] : rec2[2];
         int rightUpY = rec1[3] < rec2[3] ? rec1[3] : rec2[3];
         int s = (rightUpX - leftDownX) * (rightUpY - leftDownY);
         System.out.println(s);
-        return s > 0;
+        return s;
     }
 
     @Test
