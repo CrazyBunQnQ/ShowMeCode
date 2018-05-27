@@ -37,18 +37,25 @@ import org.junit.Test;
  * @auther CrazyBunQnQ
  */
 public class MagicSquaresInGrid {
-    public boolean isMagicSquare(int[][] square) {
-        int tmp = square[0][0] + square[1][1] + square[2][2];
-        if (tmp != square[2][0] + square[1][1] + square[0][2]) {
+    /**
+     * To determine whether or not to meet the conditions of the Magic Square
+     *
+     * @param MagicSquare
+     *
+     * @return
+     */
+    public boolean isMagicSquare(int[][] MagicSquare) {
+        int tmp = MagicSquare[0][0] + MagicSquare[1][1] + MagicSquare[2][2];
+        if (tmp != MagicSquare[2][0] + MagicSquare[1][1] + MagicSquare[0][2]) {
             return false;
         }
         for (int r = 0; r < 3; r++) {
-            if (square[r][0] == 0 || square[r][1] == 0 || square[r][2] == 0 || square[r][0] > 9 || square[r][1] > 9 || square[r][2] > 9 || tmp != square[r][0] + square[r][1] + square[r][2]) {
+            if (MagicSquare[r][0] == 0 || MagicSquare[r][1] == 0 || MagicSquare[r][2] == 0 || MagicSquare[r][0] > 9 || MagicSquare[r][1] > 9 || MagicSquare[r][2] > 9 || tmp != MagicSquare[r][0] + MagicSquare[r][1] + MagicSquare[r][2]) {
                 return false;
             }
         }
         for (int c = 0; c < 3; c++) {
-            if (square[0][c] == 0 || square[1][c] == 0 || square[2][c] == 0 || square[0][c] > 9 || square[1][c] > 9 || square[2][c] > 9 || tmp != square[0][c] + square[1][c] + square[2][c]) {
+            if (MagicSquare[0][c] == 0 || MagicSquare[1][c] == 0 || MagicSquare[2][c] == 0 || MagicSquare[0][c] > 9 || MagicSquare[1][c] > 9 || MagicSquare[2][c] > 9 || tmp != MagicSquare[0][c] + MagicSquare[1][c] + MagicSquare[2][c]) {
                 return false;
             }
         }
@@ -59,14 +66,16 @@ public class MagicSquaresInGrid {
         if (grid.length < 3 || grid[0].length < 3) {
             return 0;
         }
-        int[][] tmp;
         int count = 0;
         for (int i = 2; i < grid.length; i++) {
             for (int j = 2; j < grid[i].length; j++) {
-                tmp = new int[][]{{grid[i - 2][j - 2], grid[i - 2][j - 1], grid[i - 2][j]},
+                if (isMagicSquare(new int[][]{
+                        {grid[i - 2][j - 2], grid[i - 2][j - 1], grid[i - 2][j]},
                         {grid[i - 1][j - 2], grid[i - 1][j - 1], grid[i - 1][j]},
-                        {grid[i][j - 2], grid[i][j - 1], grid[i][j]}};
-                if (isMagicSquare(tmp)) count++;
+                        {grid[i][j - 2], grid[i][j - 1], grid[i][j]}
+                })) {
+                    count++;
+                }
             }
         }
         return count;
