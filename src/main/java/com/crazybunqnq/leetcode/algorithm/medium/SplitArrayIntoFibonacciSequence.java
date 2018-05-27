@@ -50,49 +50,52 @@ import java.util.List;
  * @auther CrazyBunQnQ
  */
 public class SplitArrayIntoFibonacciSequence {
-    public final static int MAX = 2147483646;
-
     public List<Integer> splitIntoFibonacci(String S) {
-        List<Integer> list = new ArrayList<>();
-        int num1, num2, num3, sum, index;
-        String str1, str2, str3;
-        long tmp;
-        for (int i = 1; i < 11; i++) {
-            str1 = S.substring(0, i);
-            tmp = Long.valueOf(str1);
-            if (str1.indexOf("0") == 0 && str1.length() > 1 || tmp > MAX) {
-                continue;
+        List<Integer> result = new ArrayList<>();
+        findFibonacci(S, result, 0);
+        return result;
+    }
+
+    /**
+     * Find Fibonacci numbers in a string
+     *
+     * @param sequence Target string
+     * @param result Fibonacci numbers in strings are stored in this array
+     * @param index starting point
+     * @return
+     */
+    public boolean findFibonacci(String sequence, List<Integer> result, int index) {
+        if (index == sequence.length() && result.size() >= 3) {
+            return true;
+        }
+        for (int i = index; i < sequence.length(); i++) {
+            // Also, note that when splitting the string into pieces, each piece must not have extra leading zeroes, except if the piece is the number 0 itself.
+            if (sequence.charAt(index) == '0' && i > index) {
+                break;
             }
-            num1 = (int) tmp;
-            for (int j = 1; j < 11; j++) {
-                str2 = S.substring(i, i + j);
-                tmp = Long.valueOf(str2);
-                if (str2.indexOf("0") == 0 && str2.length() > 1 || tmp + num1 > MAX) {
-                    continue;
+            long num = Long.parseLong(sequence.substring(index, i + 1));
+            if (num > Integer.MAX_VALUE) {
+                break;
+            }
+            int size = result.size();
+            // early termination
+            if (size >= 2 && num > result.get(size - 1) + result.get(size - 2)) {
+                break;
+            }
+            if (size <= 1 || num == result.get(size - 1) + result.get(size - 2)) {
+                result.add((int) num);
+                // branch pruning. if one branch has found fib seq, return true to upper call
+                if (findFibonacci(sequence, result, i + 1)) {
+                    return true;
                 }
-                num2 = (int) tmp;
-                sum = num1 + num2;
-                str3 = String.valueOf(sum);
-                if (i + j + str3.length() > S.length()) {
-                    continue;
-                }
-                if (S.substring(i + j, i + j + str3.length()).equals(str3)) {
-                    if (list.indexOf(num1) == -1) {
-                        list.add(num1);
-                    }
-                    if (list.indexOf(num2) == -1) {list.add(num2);}
-                    list.add(sum);
-                }
+                result.remove(result.size() - 1);
             }
         }
-        return null;
+        return false;
     }
 
     @Test
     public void test() {
-        int i = (int) Math.pow(2, 31) * 2;
-        System.out.println(String.valueOf(i).length());
-        double j = Math.pow(2, 31) * 2;
-        System.out.println(i + "\n" + j);
+        System.out.println(splitIntoFibonacci("1101111"));
     }
 }
