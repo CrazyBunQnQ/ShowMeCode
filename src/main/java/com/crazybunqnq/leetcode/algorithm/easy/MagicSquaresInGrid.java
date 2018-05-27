@@ -43,12 +43,12 @@ public class MagicSquaresInGrid {
             return false;
         }
         for (int r = 0; r < 3; r++) {
-            if (tmp != square[r][0] + square[r][1] + square[r][2]) {
+            if (square[r][0] == 0 || square[r][1] == 0 || square[r][2] == 0 || square[r][0] > 9 || square[r][1] > 9 || square[r][2] > 9 || tmp != square[r][0] + square[r][1] + square[r][2]) {
                 return false;
             }
         }
         for (int c = 0; c < 3; c++) {
-            if (tmp != square[0][c] + square[1][c] + square[2][c]) {
+            if (square[0][c] == 0 || square[1][c] == 0 || square[2][c] == 0 || square[0][c] > 9 || square[1][c] > 9 || square[2][c] > 9 || tmp != square[0][c] + square[1][c] + square[2][c]) {
                 return false;
             }
         }
@@ -56,6 +56,9 @@ public class MagicSquaresInGrid {
     }
 
     public int numMagicSquaresInside(int[][] grid) {
+        if (grid.length < 3 || grid[0].length < 3) {
+            return 0;
+        }
         int[][] tmp;
         int count = 0;
         for (int i = 2; i < grid.length; i++) {
