@@ -2,9 +2,8 @@ package com.crazybunqnq.leetcode.algorithm.medium;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Alice has a hand of cards, given as an array of integers.
@@ -38,44 +37,38 @@ import java.util.List;
  * @auther CrazyBunQnQ
  */
 public class HandOfStraights {
+    /**
+     * Intuition:
+     * <p>
+     * Count number of different cards to a map c.
+     * <p>
+     * Loop from the smallest card number.
+     * <p>
+     * Everytime we meet a new card i, we cut off i - i + W - 1 from the counter.
+     * <p>
+     * Time Complexity:
+     * <p>
+     * O(MlogM + MW), where M is the number of different cards.
+     *
+     * @param hand
+     * @param W
+     *
+     * @return
+     */
     public boolean isNStraightHand(int[] hand, int W) {
-        if (hand.length % W != 0) {
-            return false;
+        Map<Integer, Integer> c = new TreeMap<>();
+        for (int i : hand) {
+            c.put(i, c.getOrDefault(i, 0) + 1);
         }
-        Integer[] arr = new Integer[hand.length];
-        for (int i = 0; i < hand.length; i++) {
-            arr[i] = hand[i];
-        }
-        Arrays.sort(arr);
-        if (W == 1) {
-            for (int i = 1; i < arr.length; i++) {
-                if (arr[i] == arr[i - 1]) {
-                    return false;
-                }
-            }
-        }
-        List tmp = Arrays.asList(arr);
-        ArrayList<Integer> list = new ArrayList<Integer>(tmp);
-        for (int i = 0; i < list.size(); i = 0) {
-            for (int j = 0; j < W; j++) {
-                Integer a = list.get(i);
-                Integer b = list.get(i + 1);
-                if (b > a + 1) {
-                    return false;
-                }
-                if (b == a + 1) {
-                    if (j == W - 2) {
-                        list.remove(i + 1);
-                        j++;
+        for (int it : c.keySet())
+            if (c.get(it) > 0) {
+                for (int i = W - 1; i >= 0; --i) {
+                    if (c.getOrDefault(it + i, 0) < c.get(it)) {
+                        return false;
                     }
-                    list.remove(i);
-                }
-                if (b == a) {
-                    i++;
-                    j--;
+                    c.put(it + i, c.get(it + i) - c.get(it));
                 }
             }
-        }
         return true;
     }
 
