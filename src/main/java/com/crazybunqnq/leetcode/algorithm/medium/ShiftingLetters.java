@@ -45,12 +45,9 @@ public class ShiftingLetters {
     }
 
     public char shift(char c, int n) {
-//        n = n % 26;
-//        System.out.println("n=" + n + "  n%26=" + (n % 26));
         int result = (int) c + n;
         if (result > 122)
             result -= 26;
-        System.out.println(result + " " + (char) result);
         return (char) result;
     }
 
