@@ -39,24 +39,34 @@ import org.junit.Test;
 @Log4j
 public class MaximizeDistanceToClosestPerson {
     public int maxDistToClosest(int[] seats) {
-        int start = 0;
+        int start;
         int end = 0;
         int distance = 0;
         for (int i = 0; i < seats.length; i++) {
             if (seats[i] == 1) {
                 start = end;
                 end = i;
-                distance = end - start > distance ? end - start : distance;
+                if (start == 0 && seats[0] == 0) {
+                    distance = end * 2 > distance ? end * 2 : distance;
+                } else {
+                    distance = end - start > distance ? end - start : distance;
+                }
+            }
+            if (i == seats.length - 1 && seats[i] == 0) {
+                start = end;
+                end = i;
+                distance = (end - start) * 2 > distance ? (end - start) * 2 : distance;
             }
         }
-        return distance % 2 == 0 ? distance / 2 + 1 : (distance + 1) / 2;
+        return distance % 2 == 0 ? distance / 2 : (distance - 1) / 2;
     }
 
     @Test
     public void test() {
         int[][] ints = {
-                {1, 0, 0, 0, 1, 0, 1},
+                {0, 0, 0, 1},
                 {1, 0, 0, 0},
+                {1, 0, 0, 0, 1, 0, 1},
                 {1, 0, 0, 0, 0, 1, 0, 1}
         };
         for (int[] i : ints) {
