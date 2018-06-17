@@ -77,19 +77,21 @@ public class CarFleet {
     }
 
     public int carFleet(int target, int[] position, int[] speed) {
+        if (position.length == 0) {
+            return 0;
+        }
         //先排序
         quickSort(position, speed);
-        int count = 1;
+        int count = 0;
 
         //第一个车队所用时间
-        float time = (float) (target - position[0]) / speed[0];
-        System.out.println("第 1 个车队所用时间 " + time);
-
-        for (int i = 1; i < speed.length; i++) {
+//        float time = target;
+        float time = 0;
+        for (int i = speed.length - 1; i >= 0; i--) {
             float distance = target - position[i];
-            System.out.println("distance: " + distance);
             float time2 = distance / speed[i];
-            if (time2 < time) {
+            System.out.println("行驶距离: " + distance + " 行驶速度: " + speed[i] + " 所需时间: " + time2);
+            if (time2 > time) {
                 count++;
                 time = time2;
                 System.out.println("第 " + i + " 个车队所用时间 " + time);
@@ -100,12 +102,14 @@ public class CarFleet {
 
     @Test
     public void test() {
-        int[] targets = {12};
+        int[] targets = {12, 10};
         int[][] positions = {
-                {10, 8, 0, 5, 3}
+                {10, 8, 0, 5, 3},
+                {0, 4, 2}
         };
         int[][] speeds = {
-                {2, 4, 1, 1, 3}
+                {2, 4, 1, 1, 3},
+                {2, 1, 3}
         };
 
 
@@ -114,9 +118,9 @@ public class CarFleet {
             int[] position = positions[i];
             int[] speed = speeds[i];
             quickSort(position, speed);
-//            for (int j = 0; j < position.length; j++) {
-//                System.out.println(position[j] + "     " + speed[j]);
-//            }
+            for (int j = position.length - 1; j >= 0; j--) {
+                System.out.println("行驶距离: " + (target - position[j]) + " 初始位置: " + position[j] + " 行驶速度: " + speed[j]);
+            }
             System.out.println(carFleet(target, position, speed));
         }
     }
