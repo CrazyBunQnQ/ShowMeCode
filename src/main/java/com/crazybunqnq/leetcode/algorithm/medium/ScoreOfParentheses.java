@@ -45,43 +45,39 @@ public class ScoreOfParentheses {
     public static char right = ')';
     String rexA = "\\(\\)";
     String rex2A = "\\('(\\d+)'\\)";
-    Pattern pat2A = Pattern.compile(rex2A);
     String rexAA = "'(\\d+)''(\\d+)'";
+    Pattern pat2A = Pattern.compile(rex2A);
     Pattern patAA = Pattern.compile(rexAA);
+    String rex2A2 = "\\(\\[(\\d+)\\]\\)";
+    String rexAA2 = "\\[(\\d+)\\]\\[(\\d+)\\]";
 
     public String helper(String S) {
         String result = S;
         Matcher m2A = pat2A.matcher(result);
         Matcher mAA = patAA.matcher(result);
-        if (m2A.matches()) {
+        if (m2A.find()) {
             String rep = "'" + Integer.valueOf(m2A.group(1)) * 2 + "'";
             result = result.replaceAll(rex2A, rep);
-        } else if (mAA.matches()) {
+        } else if (mAA.find()) {
             String rep = "'" + (Integer.valueOf(mAA.group(1)) + Integer.valueOf(mAA.group(2))) + "'";
             result = result.replaceAll(rexAA, rep);
         } else {
             return result;
         }
-        System.out.println(result);
         return helper(result);
     }
 
     public int scoreOfParentheses(String S) {
         String str = S.replaceAll(rexA, "'1'");
-        System.out.println(str);
         str = helper(str);
         return Integer.valueOf(str.replace("'", ""));
     }
 
     @Test
     public void test() {
-//        String rex = "\\)\\(";
-//        System.out.println("(()(()))".replaceAll(rex, "1"));
-
         String[] ss = {"()", "(())", "()()", "(()(()))"};
         for (String S : ss) {
-//            System.out.println(scoreOfParentheses(S));
-            scoreOfParentheses(S);
+            System.out.println(scoreOfParentheses(S));
         }
     }
 }
