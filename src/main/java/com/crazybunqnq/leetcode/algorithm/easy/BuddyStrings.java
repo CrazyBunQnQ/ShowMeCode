@@ -41,13 +41,16 @@ import org.junit.Test;
  */
 public class BuddyStrings {
     public boolean buddyStrings(String A, String B) {
-        if (A.length() != B.length())
+        if (A.length() != B.length() || A.length() < 2)
             return false;
+        if (A.length() == 2 && A == B) {
+            return false;
+        }
         int n = 0;
         for (int i = 0; i < A.length(); i++) {
             if (A.charAt(i) != B.charAt(i)) {
                 n++;
-                if (n > 2)
+                if ((A.length() == 3 && n > 1) || A.length() > 3 && n > 2)
                     return false;
             }
         }
@@ -58,6 +61,8 @@ public class BuddyStrings {
     public void test() {
         String[] As = {"ab", "ab", "aa", "aaaaaaabc", ""};
         String[] Bs = {"ba", "ab", "aa", "aaaaaaacb", "aa"};
-//        for ()
+        for (int i = 0; i < As.length; i++) {
+            System.out.println(buddyStrings(As[i], Bs[i]));
+        }
     }
 }
