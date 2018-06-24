@@ -43,7 +43,7 @@ public class BuddyStrings {
     public boolean buddyStrings(String A, String B) {
         if (A.length() != B.length() || A.length() < 2)
             return false;
-        if (A.length() == 2 && A == B) {
+        if (A.length() == 2 && A.equals(B)) {
             return false;
         }
         int n = 0;
