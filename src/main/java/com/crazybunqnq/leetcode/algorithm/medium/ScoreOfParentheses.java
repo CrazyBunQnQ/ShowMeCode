@@ -41,15 +41,11 @@ import java.util.regex.Pattern;
  * @auther CrazyBunQnQ
  */
 public class ScoreOfParentheses {
-    public static char left = '(';
-    public static char right = ')';
     String rexA = "\\(\\)";
     String rex2A = "\\('(\\d+)'\\)";
     String rexAA = "'(\\d+)''(\\d+)'";
     Pattern pat2A = Pattern.compile(rex2A);
     Pattern patAA = Pattern.compile(rexAA);
-    String rex2A2 = "\\(\\[(\\d+)\\]\\)";
-    String rexAA2 = "\\[(\\d+)\\]\\[(\\d+)\\]";
 
     public String helper(String S) {
         String result = S;
@@ -73,9 +69,39 @@ public class ScoreOfParentheses {
         return Integer.valueOf(str.replace("'", ""));
     }
 
+    /**
+     * 非递归，使用堆栈，O(n)复杂度
+     *
+     * @param S
+     *
+     * @return
+     */
+    public int useStack(String S) {
+        int[] sum = new int[S.length() * 2];
+        int[] open = new int[S.length() * 2];
+        int top1 = 0, top2 = -1;
+        for (int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
+            if (c == '(') {
+                open[++top2] = i;
+                sum[++top1] = 0;
+            } else {
+                if (open[top2] == i - 1) {
+                    top2--;
+                    sum[--top1]++;
+                } else {
+                    top2--;
+                    sum[top1 - 1] += 2 * sum[top1];
+                    top1--;
+                }
+            }
+        }
+        return sum[0];
+    }
+
     @Test
     public void test() {
-        String[] ss = {"()", "(())", "()()", "(()(()))"};
+        String[] ss = {"()()()(())", "()", "(())", "()()", "(()(()))"};
         for (String S : ss) {
             System.out.println(scoreOfParentheses(S));
         }
