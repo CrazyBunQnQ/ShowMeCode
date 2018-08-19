@@ -48,6 +48,7 @@ import org.junit.Test;
  * 答案肯定存在。
  *
  * @version 2018/8/19.
+ * @Score 3
  * @auther CrazyBunQnQ
  */
 public class FairCandySwap {
@@ -82,6 +83,12 @@ public class FairCandySwap {
 
     @Test
     public void Test() {
+        int[][] As = {{1, 1}, {1, 2}, {2}, {1, 2, 5}};
+        int[][] Bs = {{2, 2}, {2, 3}, {1, 3}, {2, 4}};
 
+        for (int i = 0; i < As.length; i++) {
+            int[] ans = fairCandySwap(As[i], Bs[i]);
+            System.out.printf(ans.toString());
+        }
     }
 }
