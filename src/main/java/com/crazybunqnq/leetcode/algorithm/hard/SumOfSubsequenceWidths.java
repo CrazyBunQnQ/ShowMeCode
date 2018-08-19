@@ -3,6 +3,7 @@ package com.crazybunqnq.leetcode.algorithm.hard;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -83,7 +84,7 @@ public class SumOfSubsequenceWidths {
         return subArrs;
     }
 
-    public int sumSubseqWidths(int[] A) {
+    public int sumSubseqWidthsMe(int[] A) {
         int sum = 0;
         List<List<Integer>> subArrs = getSubArr(A);
         for (List<Integer> subArr : subArrs) {
@@ -92,9 +93,20 @@ public class SumOfSubsequenceWidths {
         return sum;
     }
 
+    public int sumSubseqWidths(int[] A) {
+        Arrays.sort(A);
+        long c = 1;
+        long res = 0;
+        long mod = (long) 1e9 + 7;
+        for (int i = 0; i < A.length; ++i, c = (c << 1) % mod)
+            res = (res + A[i] * c - A[A.length - i - 1] * c) % mod;
+        return (int) ((res + mod) % mod);
+    }
+
     @Test
     public void Test() {
-        int[][] arr = {{2, 1, 3}};
+        int[][] arr = {{9, 1, 25, 29, 21, 30, 37, 2, 39, 6, 28, 16, 32, 32, 7, 3, 15, 39, 32, 11},
+                {2, 1, 3}};
 
         for (int i = 0; i < arr.length; i++) {
             System.out.println(sumSubseqWidths(arr[i]));
