@@ -28,13 +28,60 @@ public class StringUtil {
     }
 
     /**
+     * 将字符串中的特殊字符转为 HTML 字符
+     *
+     * @param src
+     *
+     * @return
+     */
+    public static String doc2Html(String src) {
+        if (src == null) {
+            return null;
+        }
+        String s = src;
+        s = replaceAll(s, "&", "&amp;");
+        s = replaceAll(s, "<", "&lt;");
+        s = replaceAll(s, ">", "&gt;");
+        s = replaceAll(s, "\r\n", "<br>");
+        s = replaceAll(s, "\n", "<br>");
+        s = replaceAll(s, "\"", "&quot;");
+        s = replaceAll(s, "'", "&#39;");
+        return s;
+    }
+
+    /**
+     * 将原字符串 src 中的所有字符串 astr 替换成 bstr
+     *
+     * @param src  原字符串
+     * @param astr 需要替换的字符串
+     * @param bstr 替换为此字符串
+     *
+     * @return 替换后的字符串
+     */
+    public static String replaceAll(String src, String astr, String bstr) {
+        int i;
+        StringBuffer sb = new StringBuffer();
+        do {
+            i = src.indexOf(astr);
+            if (i == -1) {
+                sb.append(src);
+            } else {
+                sb.append(src.substring(0, i));
+                sb.append(bstr);
+                src = src.substring(i + astr.length());
+            }
+        } while (i != -1);
+        return sb.toString();
+    }
+
+    /**
      * 判断是否是 Emoji 字符
      *
      * @param codePoint
      *
      * @return
      */
-    private boolean isEmojiCharacter(char codePoint) {
+    private static boolean isEmojiCharacter(char codePoint) {
         return (codePoint == 0x0) || (codePoint == 0x9) || (codePoint == 0xA)
                 || (codePoint == 0xD)
                 || ((codePoint >= 0x20) && (codePoint <= 0xD7FF))
@@ -49,7 +96,7 @@ public class StringUtil {
      *
      * @return
      */
-    public String filterEmoji(String source) {
+    public static String filterEmoji(String source) {
         StringBuilder buf = null;
         int len = source.length();
         for (int i = 0; i < len; i++) {
