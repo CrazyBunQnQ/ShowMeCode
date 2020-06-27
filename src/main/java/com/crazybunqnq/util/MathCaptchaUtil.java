@@ -1,3 +1,4 @@
+/*
 package com.crazybunqnq.util;
 
 import android.graphics.Bitmap;
@@ -28,10 +29,12 @@ public class MathCaptchaUtil {
     // codeLength="4"
     // line_number="3"
     // font_size="20"
-    /**
+    */
+/**
      * 上边4个整型数的解释： BASE_PADDING_LEFT,BASE_PADDING_TOP 表示每一个将要画出字符坐标计算的基准
      * RANGE_PADDING_LEFT,RANGE_PADDING_TOP 表示字符坐标x,y的变化范围
-     */
+     *//*
+
     private static final int DEFAULT_WIDTH = 100, DEFAULT_HEIGHT = 30;
     private static MathCaptchaUtil vCode;
     int result;
@@ -64,14 +67,16 @@ public class MathCaptchaUtil {
         padding_left = 0;// 设置位图左内边距离
 
         Bitmap bi = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);// 创建位图
-        /**
+        */
+/**
          * 位图最后一个设置参数的简介 A：透明度 R：红色 G：绿 B：蓝 Bitmap.Config
          * ARGB_4444：每个像素占四位，即A=4，R=4，G=4，B=4，那么一个像素点占4+4+4+4=16位 Bitmap.Config
          * ARGB_8888：每个像素占四位，即A=8，R=8，G=8，B=8，那么一个像素点占8+8+8+8=32位 Bitmap.Config
          * RGB_565：每个像素占四位，即R=5，G=6，B=5，没有透明度，那么一个像素点占5+6+5=16位 Bitmap.Config
          * ALPHA_8：每个像素占四位，只有透明度，没有颜色。
          * 一般情况下我们都是使用的ARGB_8888，由此可知它是最占内存的，因为一个像素占32位，8位=1字节，所以一个像素占4字节的内存。假设有一张480x800的图片，如果格式为ARGB_8888，那么将会占用1500KB的内存
-         */
+         *//*
+
 
         Canvas c = new Canvas(bi);// 以创建好的空位图创建画布
 
@@ -138,10 +143,12 @@ public class MathCaptchaUtil {
         // paint.setStrikeThruText(true); //true为删除线，false为非删除线
     }
 
-    /**
+    */
+/**
      * 随机定义每一个字符所绘画的坐标，注意：在这里padding_left是具有叠加效果的，
      * 也就是说所画的字符越往后，坐标也就越大，而top永远就是base+range
-     */
+     *//*
+
     private void randomPadding() {
         padding_left += base_padding_left + random.nextInt(range_padding_left);
         padding_top = base_padding_top + random.nextInt(range_padding_top);
@@ -209,3 +216,4 @@ public class MathCaptchaUtil {
         return 0;// 默认返回0
     }
 }
+*/

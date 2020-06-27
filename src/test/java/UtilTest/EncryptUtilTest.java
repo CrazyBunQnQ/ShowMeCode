@@ -19,6 +19,9 @@ public class EncryptUtilTest {
 
         System.out.println(str.equalsIgnoreCase(oldStr)?"测试成功":"解密失败");
 
-//        Object proxyObject = Proxy.newProxyInstance()
+        System.out.println("oldst: " + oldStr);
+
+        String decode = EncryptUtil.simpleDecryption("", "", "").toLowerCase();
+        System.out.println("\nresult: " + decode);
     }
 }

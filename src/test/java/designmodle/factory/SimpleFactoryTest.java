@@ -13,9 +13,9 @@ public class SimpleFactoryTest {
     public void test() {
         ShapeFactory shapeFactory = new ShapeFactory();
 
-        Shape circle = shapeFactory.getShape(ShapeFactory.CIRCLE);
-        Shape rectangle = shapeFactory.getShape(ShapeFactory.RECTANGLE);
-        Shape square = shapeFactory.getShape(ShapeFactory.SQUARE);
+        Shape circle = shapeFactory.getShape(Shape.CIRCLE);
+        Shape rectangle = shapeFactory.getShape(Shape.RECTANGLE);
+        Shape square = shapeFactory.getShape(Shape.SQUARE);
 
         circle.draw();
         rectangle.draw();
