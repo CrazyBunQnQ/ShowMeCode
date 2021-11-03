@@ -40,15 +40,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from employee
+    from yusys_employee
     where actorno = #{actorno,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from employee
+    delete from yusys_employee
     where actorno = #{actorno,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="bean.Employee">
-    insert into employee (actorno, actorname, loginname, 
+    insert into yusys_employee (actorno, actorname, loginname,
       usermail, telnum, orgid, 
       organname, statename, glzzwname, 
       stafflevel, salarytype, staffsexname, 
@@ -70,7 +70,7 @@
       #{workplace,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="bean.Employee">
-    insert into employee
+    insert into yusys_employee
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="actorno != null">
         actorno,
@@ -245,7 +245,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="bean.Employee">
-    update employee
+    update yusys_employee
     <set>
       <if test="actorname != null">
         actorname = #{actorname,jdbcType=VARCHAR},
@@ -332,7 +332,7 @@
     where actorno = #{actorno,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="bean.Employee">
-    update employee
+    update yusys_employee
     set actorname = #{actorname,jdbcType=VARCHAR},
       loginname = #{loginname,jdbcType=VARCHAR},
       usermail = #{usermail,jdbcType=VARCHAR},
